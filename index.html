@@ -167,8 +167,8 @@ Data for nerds
             let attempts = letterData ? letterData[1] : Infinity;
             quizMe.innerHTML = `
             ${getLetterButton(letter).outerHTML}
-            <button response=yes data-letter="${letter}">Check</button>
-            <button response=no data-letter="${letter}">Ex</button>
+            <button response=yes data-letter="${letter}">👍</button>
+            <button response=no data-letter="${letter}">👎</button>
             <span hidden>${correct / Infinity}%</span>
           `;
         }
