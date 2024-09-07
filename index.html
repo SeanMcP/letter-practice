@@ -162,7 +162,9 @@ Data for nerds
         shuffle();
 
         function renderLetterCard(letter) {
-            let [correct = 0, attempts = Infinity] = getData()[letter];
+            let letterData = getData()[letter]
+            let correct = letterData ? letterData[0] : 0;
+            let attempts = letterData ? letterData[1] : Infinity;
             quizMe.innerHTML = `
             ${getLetterButton(letter).outerHTML}
             <button response=yes data-letter="${letter}">Check</button>
