@@ -54,6 +54,11 @@
             #quiz-me :is([read-me], span) {
                 grid-column: 1 / span 2;
             }
+
+            table {
+                text-align: center;
+                width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -72,22 +77,21 @@
                 </fieldset>
                 <fieldset>
                     <legend>Practice mode</legend>
-<label>
-<input type="radio" name="mode" value="sound-board" checked/>
-Sound board
-</label
-<label>
-<input type="radio" name="mode" value="quiz-me"/>
-Quiz me
-</label
-<label>
-<input type="radio" name="mode" value="data-for-nerds"/>
-Data for nerds
-</label>
+                    <label>
+                        <input type="radio" name="mode" value="sound-board" checked/>
+                        Sound board
+                    </label
+                    <label>
+                        <input type="radio" name="mode" value="quiz-me"/>
+                        Quiz me
+                    </label
+                    <label>
+                        <input type="radio" name="mode" value="data-for-nerds"/>
+                        Data for nerds
+                    </label>
                 </fieldset>
             </form>
-            <div id="sound-board">
-            </div>
+            <div id="sound-board"></div>
             <div id="quiz-me"></div>
             <div id="data-for-nerds"></div>
         </main>
@@ -208,9 +212,14 @@ Data for nerds
         let dataForNerds = document.querySelector("#data-for-nerds");
         function writeTable(data) {
             let table = `<table><thead><tr><th>Letter</th><th>Attempts</th><th>Percent correct</th></tr></thead><tbody>`;
-            for (let letter in data) {
-                let results = data[letter];
-                table += `<tr><td>${letter}</td><td>${results[1]}</td><td>${(results[0] / results[1]).toFixed(2)}%</td></tr>`;
+            for (let letter of alphabet) {
+                let letterData = data[letter];
+                table += `
+              <tr>
+                <td>${letter}</td>
+                <td>${letterData ? letterData[1] : "-"}</td>
+                <td>${letterData ? (letterData[0] / letterData[1]).toFixed(2) + "%" : "-"}</td>
+              </tr>`;
             }
             table += "</tbody></table>";
             dataForNerds.innerHTML = table;
